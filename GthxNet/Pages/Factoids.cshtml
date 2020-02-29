@@ -1,0 +1,39 @@
+﻿@page
+@model GthxNet.Pages.FactoidsModel
+@{
+}
+<h1>Factoids</h1>
+
+<form method="get">
+    <div class="form-group">
+        <div class="input-group">
+            <input type="search" class="form-control" name="searchTerm" />
+            <span>
+                <button class="btn btn-default">
+                    <i class="fas fa-search"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+</form>
+
+<table class="table" id="table" data-toggle="table">
+    <thead>
+        <tr>
+            <th>Factoid</th>
+            <th data-checkbox="true">Are?</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var factoid in Model.Factoids)
+        {
+            <tr>
+                <td>@factoid.Item</td>
+                <td>@factoid.IsAre</td>
+                <td>@factoid.Value</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
