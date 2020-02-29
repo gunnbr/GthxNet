@@ -10,19 +10,19 @@
             <input type="search" class="form-control" name="searchTerm" />
             <span>
                 <button class="btn btn-default">
-                    <i class="fas fa-search"></i>
+                    Search
                 </button>
             </span>
         </div>
     </div>
 </form>
 
-<table class="table" id="table" data-toggle="table">
+<table class="table table-bordered" id="table" data-toggle="table">
     <thead>
         <tr>
             <th>Factoid</th>
-            <th data-checkbox="true">Are?</th>
-            <th>Value</th>
+            <th class="bs-checkbox">Are?</th>
+            <th class="table-success">Value</th>
         </tr>
     </thead>
     <tbody>
@@ -30,7 +30,19 @@
         {
             <tr>
                 <td>@factoid.Item</td>
-                <td>@factoid.IsAre</td>
+                <td class="bs-checkbox">
+                    <label>
+                        @if (factoid.IsAre)
+                        {
+                            <input data-index="0" name="btSelectItem" type="checkbox" checked>
+                        }
+                        else
+                        {
+                            <input data-index="0" name="btSelectItem" type="checkbox" />
+                        }
+                        <span></span>
+                    </label>
+                </td>
                 <td>@factoid.Value</td>
             </tr>
         }
