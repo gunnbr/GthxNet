@@ -22,7 +22,7 @@
         <tr>
             <th>Factoid</th>
             <th class="bs-checkbox">Are?</th>
-            <th class="table-success">Value</th>
+            <th>Value</th>
         </tr>
     </thead>
     <tbody>
@@ -32,15 +32,7 @@
                 <td>@factoid.Item</td>
                 <td class="bs-checkbox">
                     <label>
-                        @if (factoid.IsAre)
-                        {
-                            <input data-index="0" name="btSelectItem" type="checkbox" checked />
-                        }
-                        else
-                        {
-                            <input data-index="0" name="btSelectItem" type="checkbox" />
-                        }
-                        <span></span>
+                        <input data-index="0" name="btSelectItem" type="checkbox" @(factoid.IsAre ? "checked=\"checked\"" : "" )/>
                     </label>
                 </td>
                 <td>@factoid.Value</td>
