@@ -7,7 +7,7 @@ namespace GthxNet.Data
 {
     public interface IFactoidData
     {
-        IEnumerable<Factoid> GetAll();
+        IEnumerable<Factoid> GetFactoidsByName(string name);
     }
 
     public class InMemoryFactoidData : IFactoidData
@@ -25,9 +25,14 @@ namespace GthxNet.Data
             };
         }
 
-        public IEnumerable<Factoid> GetAll()
+        public IEnumerable<Factoid> GetFactoidsByName(string name = null)
         {
-            return factoids.OrderBy(f => f.Item);
+            if (name == null)
+            {
+                return factoids.OrderBy(f => f.Item);
+            }
+
+            return factoids.Where(f => f.Item.Contains(name)).OrderBy(f => f.Item);
         }
     }
 }

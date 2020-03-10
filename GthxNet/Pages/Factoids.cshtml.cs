@@ -12,8 +12,11 @@ namespace GthxNet.Pages
     public class FactoidsModel : PageModel
     {
         private readonly IFactoidData factoidData;
-
+        
         public IEnumerable<Factoid> Factoids;
+        
+        [BindProperty(SupportsGet = true)]
+        public string SearchTerm { get; set; }
 
         public FactoidsModel(IFactoidData factoidData)
         {
@@ -22,7 +25,7 @@ namespace GthxNet.Pages
 
         public void OnGet()
         {
-            Factoids = factoidData.GetAll();
+            Factoids = factoidData.GetFactoidsByName(SearchTerm);
         }
     }
 }
