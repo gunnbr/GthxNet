@@ -13,7 +13,7 @@ namespace GthxNet.Pages
     {
         private readonly IFactoidData factoidData;
         
-        public IEnumerable<Factoid> Factoids;
+        public IEnumerable<Factoid> Factoids { get; set; }
         
         [BindProperty(SupportsGet = true)]
         public string SearchTerm { get; set; }
