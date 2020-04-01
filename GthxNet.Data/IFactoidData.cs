@@ -8,6 +8,10 @@ namespace GthxNet.Data
     public interface IFactoidData
     {
         IEnumerable<Factoid> GetFactoidsByName(string name);
+        Factoid Update(Factoid updatedFactoid);
+        Factoid Add(Factoid newFactoid);
+        Factoid Delete(int id);
+        int Commit();
     }
 
     public class InMemoryFactoidData : IFactoidData
@@ -25,6 +29,30 @@ namespace GthxNet.Data
             };
         }
 
+        public Factoid Add(Factoid newFactoid)
+        {
+            if (newFactoid == null)
+            {
+                return null;
+            }
+
+            factoids.Add(newFactoid);
+            newFactoid.Id = factoids.Max(r => r.Id) + 1;
+            return newFactoid;
+        }
+
+        public int Commit()
+        {
+            return 0;
+        }
+
+        public Factoid Delete(int id)
+        {
+            var factoid = factoids.FirstOrDefault(r => r.Id == id);
+            factoids?.Remove(factoid);
+            return null;
+        }
+
         public IEnumerable<Factoid> GetFactoidsByName(string name = null)
         {
             if (name == null)
@@ -32,7 +60,28 @@ namespace GthxNet.Data
                 return factoids.OrderBy(f => f.Item);
             }
 
-            return factoids.Where(f => f.Item.Contains(name)).OrderBy(f => f.Item);
+            return factoids.Where(f => f.Item.Contains(name, StringComparison.CurrentCultureIgnoreCase)).OrderBy(f => f.Item);
+        }
+
+        public Factoid Update(Factoid updatedFactoid)
+        {
+            if (updatedFactoid == null)
+            {
+                return null;
+            }
+
+            var factoid = factoids.SingleOrDefault(r => r.Id == updatedFactoid.Id);
+            if (factoid != null)
+            {
+                factoid.Item = updatedFactoid.Item;
+                factoid.IsAre = updatedFactoid.IsAre;
+                factoid.Value = updatedFactoid.Value;
+                factoid.DateSet = DateTime.UtcNow;
+                factoid.IsLocked = updatedFactoid.IsLocked;
+                factoid.LastSync = updatedFactoid.LastSync;
+                factoid.Nick = updatedFactoid.Nick;
+            }
+            return factoid;
         }
     }
 }
