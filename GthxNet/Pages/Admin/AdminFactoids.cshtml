@@ -1,0 +1,57 @@
+﻿@page
+@model GthxNet.AdminFactoidsModel
+@{
+    ViewData["Title"] = "Administer Factoids";
+}
+
+<h1>Administer Factoids</h1>
+
+<form method="get">
+    <div class="form-group">
+        <div class="input-group">
+            <input type="search" class="form-control" asp-for="SearchTerm" autofocus onfocus="this.select();" />
+            <span>
+                <button class="btn btn-default">
+                    <i class="fas fa-search"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+</form>
+
+<table class="table table-bordered" id="table" data-toggle="table">
+    <thead>
+        <tr>
+            <th>Factoid</th>
+            <th class="bs-checkbox">Are?</th>
+            <th>Value</th>
+            <th>Set By</th>
+            <th>Last Modified</th>
+            <th class="bs-checkbox">Locked?</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var factoid in Model.Factoids)
+        {
+        <tr>
+            <td>
+                @factoid.Item
+            </td>
+            <td class="bs-checkbox">
+                <label>
+                    <input data-index="0" name="btSelectItem" type="checkbox" @(factoid.IsAre ? "checked=\"checked\"" : "") />
+                </label>
+            </td>
+            <td>@factoid.Value</td>
+            <td>@factoid.Nick</td>
+            <td>@factoid.DateSet</td>
+            <td class="bs-checkbox">
+                <label>
+                    <input data-index="0" name="btSelectItem" type="checkbox" @(factoid.IsLocked ? "checked=\"checked\"" : "") />
+                </label>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+

@@ -26,6 +26,7 @@ namespace GthxNet.Data
                 new Factoid(){Id = 2, Item = "prusa", Value = "Joseph Prusa: The best printer designer", Nick= "Lizard|Work", DateSet = new DateTime(2015,4,21) },
                 new Factoid(){Id = 3, Item = "#reprap", Value = "A wretched hive of villany", Nick= "hexa", DateSet = new DateTime(2016,1,3) },
                 new Factoid(){Id = 4, Item = "printers", Value = "the best!", Nick= "rojro", DateSet = new DateTime(2016,4,21), IsAre=true },
+                new Factoid(){Id = 5, Item = "botsnack", Value = "<reply>Yum, delicioso!", Nick= "gunnbr", DateSet = new DateTime(2015,4,21), IsLocked=true },
             };
         }
 
